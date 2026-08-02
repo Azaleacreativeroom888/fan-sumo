@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>土俵の書 | 相撲学習ノート</title>
+<meta name="description" content="決まり手、番付、歴史、土俵の言葉——相撲を学び、記録していく個人ノート。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f0dc;
+    --cream-2:#efe3c2;
+    --cream-3:#e4d5a8;
+    --black:#1c140b;
+    --brown:#5c4c33;
+    --brown-soft:#7a6847;
+    --gold:#d99a1f;
+    --gold-deep:#a8720f;
+    --gold-bright:#e9b73a;
+    --serif:'Shippori Mincho B1', serif;
+    --sans:'Zen Kaku Gothic New', sans-serif;
+    --body:'Noto Sans JP', sans-serif;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--cream);
+    color:var(--black);
+    font-family:var(--body);
+    line-height:1.9;
+    overflow-x:hidden;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--gold);color:var(--black);}
+
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--sans);
+    font-size:.72rem;
+    letter-spacing:.32em;
+    color:var(--gold-deep);
+    text-transform:uppercase;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-deep);display:inline-block;}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;color:var(--black);}
+
+  /* ---------- header ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 28px;
+    background:linear-gradient(to bottom, rgba(247,240,220,.94), rgba(247,240,220,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:34px;height:34px;flex-shrink:0;}
+  .brand .label{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .ja{font-family:var(--serif);font-weight:800;font-size:1.15rem;color:var(--black);letter-spacing:.04em;}
+  .brand .en{font-family:var(--sans);font-size:.58rem;letter-spacing:.26em;color:var(--gold-deep);margin-top:3px;}
+
+  nav.mainnav{display:flex;align-items:center;gap:34px;}
+  nav.mainnav a{
+    font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;
+    color:var(--brown);position:relative;padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  nav.mainnav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-deep);transition:width .3s ease;}
+  nav.mainnav a:hover{color:var(--black);}
+  nav.mainnav a:hover::after{width:100%;}
+  nav.mainnav a.current{color:var(--gold-deep);}
+
+  .menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{width:22px;height:2px;background:var(--black);display:block;}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;min-height:100svh;
+    display:flex;flex-direction:column;justify-content:center;
+    padding-top:90px;overflow:hidden;isolation:isolate;
+  }
+  .hero-wave{position:absolute;inset:0;z-index:-2;opacity:.95;}
+  .hero-ring{
+    position:absolute;right:-40px;top:16%;width:420px;height:420px;
+    border-radius:50%;border:1px dashed rgba(28,20,11,.28);z-index:-1;
+  }
+  .hero-ring::before{content:"";position:absolute;inset:28px;border-radius:50%;border:1px solid rgba(28,20,11,.14);}
+  .hero-figure{
+    position:absolute;right:24px;top:calc(16% + 60px);width:280px;z-index:0;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at 15% 30%, rgba(247,240,220,0) 0%, rgba(247,240,220,.5) 60%, rgba(247,240,220,.85) 100%);
+    z-index:-1;
+  }
+  .hero-inner{max-width:1080px;width:100%;margin:0 auto;padding:0 28px;position:relative;}
+  .hero h1{font-size:clamp(2.6rem, 7vw, 5rem);letter-spacing:.06em;margin:22px 0 26px;}
+  .hero p{max-width:500px;color:var(--brown);font-size:1.02rem;}
+  .hero-cta{margin-top:38px;display:flex;gap:18px;flex-wrap:wrap;}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;
+    padding:14px 26px;border:1.5px solid var(--black);color:var(--black);
+    transition:all .3s ease;
+  }
+  .btn.filled{background:var(--black);color:var(--cream);border-color:var(--black);font-weight:700;}
+  .btn.filled:hover{background:var(--gold-deep);border-color:var(--gold-deep);}
+  .btn:not(.filled):hover{background:rgba(217,154,31,.14);}
+
+  .scrollcue{
+    position:absolute;bottom:36px;left:28px;display:flex;align-items:center;gap:12px;
+    font-family:var(--sans);font-size:.68rem;letter-spacing:.3em;color:var(--brown-soft);
+  }
+  .scrollcue .line{width:1px;height:38px;background:linear-gradient(to bottom, var(--gold-deep), transparent);animation:drip 2.2s ease-in-out infinite;}
+  @keyframes drip{
+    0%{transform:scaleY(0);transform-origin:top;}
+    50%{transform:scaleY(1);transform-origin:top;}
+    51%{transform-origin:bottom;}
+    100%{transform:scaleY(0);transform-origin:bottom;}
+  }
+
+  section{position:relative;padding:110px 0;}
+  .divider{display:flex;align-items:center;gap:16px;color:var(--gold-deep);opacity:.75;margin:0 auto 60px;width:fit-content;}
+  .divider .knot{width:8px;height:8px;border-radius:50%;background:var(--gold-deep);}
+  .divider .rope-line{width:120px;height:1px;background:repeating-linear-gradient(90deg, var(--gold-deep) 0 6px, transparent 6px 10px);}
+
+  .intro{background:var(--cream-2);border-top:1px solid rgba(28,20,11,.1);border-bottom:1px solid rgba(28,20,11,.1);}
+  .intro .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .intro h2{font-size:2.1rem;margin-bottom:22px;}
+  .intro p{color:var(--brown);}
+  .intro-figure{position:relative;aspect-ratio:1/1;max-width:300px;margin:0 auto;}
+
+  .categories h2{text-align:center;font-size:2.1rem;}
+  .cat-lead{text-align:center;color:var(--brown);max-width:480px;margin:0 auto 64px;}
+  .cat-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:2px;background:rgba(28,20,11,.14);border:1px solid rgba(28,20,11,.14);}
+  .cat-card{background:var(--cream);padding:44px 38px;transition:background .3s ease;}
+  .cat-card:hover{background:var(--cream-2);}
+  .cat-rank{
+    display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;
+    border-radius:50%;border:1.5px solid var(--gold-deep);
+    font-family:var(--serif);font-weight:800;font-size:.82rem;color:var(--gold-deep);margin-bottom:22px;
+  }
+  .cat-card h3{font-size:1.35rem;margin-bottom:12px;}
+  .cat-card p{color:var(--brown);font-size:.92rem;}
+
+  .teasers{background:var(--cream-2);border-top:1px solid rgba(28,20,11,.1);}
+  .teaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:rgba(28,20,11,.14);border:1px solid rgba(28,20,11,.14);}
+  .teaser-card{background:var(--cream-2);padding:52px 42px;display:flex;flex-direction:column;gap:18px;}
+  .teaser-card .eyebrow{margin-bottom:6px;}
+  .teaser-card h3{font-size:1.6rem;}
+  .teaser-card p{color:var(--brown);flex-grow:1;}
+  .teaser-card .btn{align-self:flex-start;}
+
+  .about-cta{text-align:center;}
+  .about-cta .wrap{max-width:640px;}
+  .about-cta h2{font-size:1.9rem;margin-bottom:20px;}
+  .about-cta p{color:var(--brown);margin-bottom:34px;}
+
+  footer{padding:60px 0 40px;border-top:1px solid rgba(28,20,11,.12);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer .brand .ja{font-size:1rem;}
+  footer nav{display:flex;gap:24px;flex-wrap:wrap;}
+  footer nav a{font-family:var(--sans);font-size:.78rem;color:var(--brown);letter-spacing:.06em;}
+  footer nav a:hover{color:var(--gold-deep);}
+  .foot-note{width:100%;margin-top:30px;font-size:.72rem;color:var(--brown-soft);font-family:var(--sans);letter-spacing:.04em;}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    nav.mainnav{
+      position:fixed;top:64px;right:0;background:var(--cream-2);
+      flex-direction:column;align-items:flex-start;gap:0;width:220px;
+      border-left:1px solid rgba(28,20,11,.14);border-bottom:1px solid rgba(28,20,11,.14);
+      transform:translateX(100%);transition:transform .35s ease;
+    }
+    nav.mainnav.open{transform:translateX(0);}
+    nav.mainnav a{padding:16px 24px;width:100%;border-bottom:1px solid rgba(28,20,11,.08);}
+    .menu-toggle{display:flex;}
+    .intro .wrap{grid-template-columns:1fr;}
+    .intro-figure{order:-1;max-width:200px;}
+    .cat-grid{grid-template-columns:1fr;}
+    .teaser-grid{grid-template-columns:1fr;}
+    .hero-ring{display:none;}
+    .hero-figure{width:170px;top:18%;right:10px;opacity:.9;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <svg class="mark" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,12 C46,7 53,2 58,6 C62,10 57,15 51,13" fill="#1c140b"/>
+      <circle cx="50" cy="30" r="16" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <circle cx="44" cy="30" r="1.8" fill="#1c140b"/>
+      <circle cx="56" cy="30" r="1.8" fill="#1c140b"/>
+      <path d="M45,36 Q50,40 55,36" stroke="#1c140b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M28,52 C20,66 20,86 32,98 C40,105 60,105 68,98 C80,86 80,66 72,52 C64,45 36,45 28,52 Z" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <path d="M24,75 Q50,84 76,75" stroke="#d99a1f" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="label">
+      <span class="ja">土俵の書</span>
+      <span class="en">SUMO STUDY NOTES</span>
+    </span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+  <nav class="mainnav" id="mainnav">
+    <a href="index.html" class="current">ホーム</a>
+    <a href="blog.html">日誌</a>
+    <a href="gallery.html">画帖</a>
+    <a href="about.html">について</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <svg class="hero-wave" viewBox="0 0 1400 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <path d="M-50,560 C150,480 300,620 480,540 C660,460 760,360 980,420 C1150,468 1300,400 1460,320 L1460,900 L-50,900 Z" fill="rgba(28,20,11,0.05)"/>
+    <path d="M-50,640 C120,560 220,660 360,600 C520,530 600,420 760,380 C880,350 940,260 1060,230 C1150,208 1220,240 1300,190 L1460,150 L1460,900 L-50,900 Z" fill="rgba(28,20,11,0.08)"/>
+    <path d="M-60,520
+             C 80,470 140,560 230,540
+             C 300,524 320,470 380,450
+             C 300,470 260,430 300,390
+             C 340,420 350,470 400,470
+             C 430,470 420,420 460,400
+             C 420,440 460,480 500,460
+             C 470,430 500,390 540,380
+             C 500,400 470,370 500,340
+             C 540,320 560,280 620,270
+             C 660,262 660,300 700,290
+             C 680,270 700,240 730,232
+             C 700,250 680,220 700,200
+             C 740,190 760,150 820,140
+             C 870,132 880,180 930,168
+             C 900,150 920,110 960,102
+             C 1010,92 1040,60 1100,58
+             C 1160,56 1180,100 1230,88
+             C 1200,70 1220,30 1270,24
+             C 1330,16 1370,44 1420,30"
+          fill="none" stroke="#1c140b" stroke-width="3.5" stroke-linecap="round" opacity="0.75"/>
+    <g fill="none" stroke="#1c140b" stroke-width="2.2" stroke-linecap="round" opacity="0.6">
+      <path d="M180,510 C170,494 178,476 196,472 C182,480 182,498 194,508"/>
+      <path d="M420,430 C410,414 418,396 436,392 C422,400 422,418 434,428"/>
+      <path d="M660,260 C650,244 658,226 676,222 C662,230 662,248 674,258"/>
+      <path d="M920,140 C910,124 918,106 936,102 C922,110 922,128 934,138"/>
+      <path d="M1180,70 C1170,54 1178,36 1196,32 C1182,40 1182,58 1194,68"/>
+    </g>
+    <g fill="#d99a1f" opacity="0.8">
+      <circle cx="250" cy="470" r="3.2"/>
+      <circle cx="510" cy="380" r="2.6"/>
+      <circle cx="770" cy="260" r="3.2"/>
+      <circle cx="1020" cy="150" r="2.6"/>
+      <circle cx="1280" cy="60" r="3.2"/>
+      <circle cx="330" cy="510" r="2.2"/>
+      <circle cx="600" cy="420" r="2.2"/>
+      <circle cx="880" cy="290" r="2.2"/>
+    </g>
+  </svg>
+
+  <div class="hero-ring" aria-hidden="true"></div>
+
+  <svg class="hero-figure" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M75,190 C65,205 60,220 55,230" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M125,190 C135,205 140,220 145,230" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <ellipse cx="50" cy="232" rx="15" ry="7" fill="#1c140b"/>
+    <ellipse cx="150" cy="232" rx="15" ry="7" fill="#1c140b"/>
+    <path d="M58,122 C36,132 24,148 30,168" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <path d="M142,122 C164,132 176,148 170,168" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+    <circle cx="28" cy="170" r="10" fill="#1c140b"/>
+    <circle cx="172" cy="170" r="10" fill="#1c140b"/>
+    <path d="M60,95 C40,120 38,166 55,197 C75,217 125,217 145,197 C162,166 160,120 140,95 C120,80 80,80 60,95 Z" fill="#f7f0dc" stroke="#1c140b" stroke-width="5"/>
+    <path d="M46,149 C75,164 125,164 154,149" stroke="#d99a1f" stroke-width="17" stroke-linecap="round" fill="none"/>
+    <rect x="90" y="140" width="20" height="22" rx="5" fill="#d99a1f" stroke="#1c140b" stroke-width="2.5"/>
+    <path d="M52,15 C46,8 55,1 62,6 C68,11 61,18 53,15" fill="#1c140b"/>
+    <circle cx="100" cy="58" r="32" fill="#f7f0dc" stroke="#1c140b" stroke-width="5"/>
+    <circle cx="87" cy="58" r="3.4" fill="#1c140b"/>
+    <circle cx="113" cy="58" r="3.4" fill="#1c140b"/>
+    <circle cx="74" cy="69" r="6.5" fill="#d99a1f" opacity=".45"/>
+    <circle cx="126" cy="69" r="6.5" fill="#d99a1f" opacity=".45"/>
+    <path d="M90,69 Q100,76 110,69" stroke="#1c140b" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+  </svg>
+
+  <div class="hero-inner">
+    <span class="eyebrow">相撲学習ノート</span>
+    <h1>土俵の書</h1>
+    <p>仕切り、立ち合い、そして決まり手——土俵の上で起こるすべてには理由がある。技と歴史、力士たちの記録を、ひとつずつここに積み重ねていく。</p>
+    <div class="hero-cta">
+      <a href="blog.html" class="btn filled">日誌を読む</a>
+      <a href="about.html" class="btn">このサイトについて</a>
+    </div>
+  </div>
+
+  <div class="scrollcue"><span class="line"></span>SCROLL</div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">なぜ相撲を学ぶか</span>
+      <h2>波と、相撲と。</h2>
+      <p>北斎が描いた大波は、寄せては返す力の応酬だった。土俵の上でぶつかり合う力士たちもまた、同じ律動を持っている——押し、耐え、崩れ、また押し返す。この帳は、その一瞬一瞬を言葉と絵で捉えるための場所。知識を蓄えながら、相撲というひとつの文化をゆっくり読み解いていく。</p>
+    </div>
+    <div class="intro-figure reveal">
+      <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="150" cy="150" r="120" fill="none" stroke="#d99a1f" stroke-width="1.5" stroke-dasharray="2 10" stroke-linecap="round"/>
+        <circle cx="150" cy="150" r="92" fill="none" stroke="#1c140b" stroke-width="1" opacity="0.3"/>
+        <text x="150" y="160" text-anchor="middle" font-family="'Shippori Mincho B1', serif" font-size="46" fill="#1c140b" font-weight="800">土俵</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="categories">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="divider"><span class="knot"></span><span class="rope-line"></span><span class="knot"></span></div>
+      <h2>学びの番付</h2>
+      <p class="cat-lead">学習の重みを、そのまま番付に見立てて並べている。上位ほど、まず押さえておきたい基礎。</p>
+    </div>
+
+    <div class="cat-grid reveal">
+      <div class="cat-card">
+        <span class="cat-rank">横綱</span>
+        <h3>決まり手図鑑</h3>
+        <p>寄り切りから居反りまで、決まり手をひとつずつ図解と共に解説していく。</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-rank">大関</span>
+        <h3>番付を読む</h3>
+        <p>番付表の仕組み、地位の呼び名、番付編成の裏側を追う。</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-rank">関脇</span>
+        <h3>相撲の歴史</h3>
+        <p>神事としての起源から、興行としての発展、現代の大相撲まで。</p>
+      </div>
+      <div class="cat-card">
+        <span class="cat-rank">小結</span>
+        <h3>土俵の言葉</h3>
+        <p>仕切り、塵手水、蹲踞——所作と言葉、その由来を辿る。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="teasers">
+  <div class="wrap">
+    <div class="teaser-grid reveal">
+      <div class="teaser-card">
+        <span class="eyebrow">日々の記録</span>
+        <h3>日誌</h3>
+        <p>調べたこと、気づいたこと、観戦の記録。日付と共に、思いつくままに書き留めていく場所。</p>
+        <a href="blog.html" class="btn">日誌を読む</a>
+      </div>
+      <div class="teaser-card">
+        <span class="eyebrow">絵と記録</span>
+        <h3>画帖</h3>
+        <p>取組の一場面、力士の姿、波と土俵をめぐるスケッチをまとめていく画帖。</p>
+        <a href="gallery.html" class="btn">画帖を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about-cta">
+  <div class="wrap reveal">
+    <div class="divider" style="margin-bottom:32px;"><span class="knot"></span><span class="rope-line"></span><span class="knot"></span></div>
+    <h2>このサイトについて</h2>
+    <p>相撲初心者が、少しずつ知識を積み重ねていく個人的な学習ノートです。詳しい経緯やこのサイトの成り立ちはこちらから。</p>
+    <a href="about.html" class="btn filled">について を見る</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="label"><span class="ja">土俵の書</span></span>
+    </a>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">日誌</a>
+      <a href="gallery.html">画帖</a>
+      <a href="about.html">について</a>
+    </nav>
+    <p class="foot-note">© 土俵の書 — 個人の相撲学習ノートです。</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainnav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
