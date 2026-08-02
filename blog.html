@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>日誌 | 土俵の書</title>
+<meta name="description" content="相撲を学ぶ日々の記録。日付と気づきだけを綴る日誌。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f0dc;
+    --cream-2:#efe3c2;
+    --cream-3:#e4d5a8;
+    --black:#1c140b;
+    --brown:#5c4c33;
+    --brown-soft:#7a6847;
+    --gold:#d99a1f;
+    --gold-deep:#a8720f;
+    --gold-bright:#e9b73a;
+    --serif:'Shippori Mincho B1', serif;
+    --sans:'Zen Kaku Gothic New', sans-serif;
+    --body:'Noto Sans JP', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--black);font-family:var(--body);line-height:1.9;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--gold);color:var(--black);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;color:var(--gold-deep);
+    text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-deep);display:inline-block;}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;color:var(--black);}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
+    background:linear-gradient(to bottom, rgba(247,240,220,.94), rgba(247,240,220,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:34px;height:34px;flex-shrink:0;}
+  .brand .label{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .ja{font-family:var(--serif);font-weight:800;font-size:1.15rem;color:var(--black);letter-spacing:.04em;}
+  .brand .en{font-family:var(--sans);font-size:.58rem;letter-spacing:.26em;color:var(--gold-deep);margin-top:3px;}
+  nav.mainnav{display:flex;align-items:center;gap:34px;}
+  nav.mainnav a{font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;color:var(--brown);position:relative;padding-bottom:4px;transition:color .25s ease;}
+  nav.mainnav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-deep);transition:width .3s ease;}
+  nav.mainnav a:hover{color:var(--black);}
+  nav.mainnav a:hover::after{width:100%;}
+  nav.mainnav a.current{color:var(--gold-deep);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{width:22px;height:2px;background:var(--black);display:block;}
+
+  .page-header{padding:150px 0 60px;position:relative;border-bottom:1px solid rgba(28,20,11,.12);}
+  .page-header h1{font-size:clamp(2.2rem,5vw,3.2rem);margin:18px 0 20px;}
+  .page-header p{max-width:520px;color:var(--brown);}
+  .header-strip{margin-top:44px;opacity:.8;}
+
+  section{position:relative;padding:80px 0 110px;}
+
+  .entries{max-width:720px;margin:0 auto;position:relative;}
+  .entries::before{
+    content:"";position:absolute;left:6px;top:8px;bottom:8px;width:1px;
+    background:repeating-linear-gradient(to bottom, var(--gold-deep) 0 6px, transparent 6px 12px);
+    opacity:.6;
+  }
+  .entry{position:relative;padding:0 0 52px 40px;}
+  .entry::before{
+    content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border-radius:50%;
+    background:var(--cream);border:2px solid var(--gold-deep);
+  }
+  .entry time{
+    display:block;font-family:var(--serif);font-weight:700;font-size:1.05rem;color:var(--gold-deep);
+    letter-spacing:.04em;margin-bottom:10px;
+  }
+  .entry p{color:var(--black);max-width:600px;font-size:.98rem;}
+
+  footer{padding:60px 0 40px;border-top:1px solid rgba(28,20,11,.12);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer nav{display:flex;gap:24px;flex-wrap:wrap;}
+  footer nav a{font-family:var(--sans);font-size:.78rem;color:var(--brown);letter-spacing:.06em;}
+  footer nav a:hover{color:var(--gold-deep);}
+  .foot-note{width:100%;margin-top:30px;font-size:.72rem;color:var(--brown-soft);font-family:var(--sans);letter-spacing:.04em;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    nav.mainnav{
+      position:fixed;top:64px;right:0;background:var(--cream-2);flex-direction:column;align-items:flex-start;
+      gap:0;width:220px;border-left:1px solid rgba(28,20,11,.14);border-bottom:1px solid rgba(28,20,11,.14);
+      transform:translateX(100%);transition:transform .35s ease;
+    }
+    nav.mainnav.open{transform:translateX(0);}
+    nav.mainnav a{padding:16px 24px;width:100%;border-bottom:1px solid rgba(28,20,11,.08);}
+    .menu-toggle{display:flex;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <svg class="mark" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,12 C46,7 53,2 58,6 C62,10 57,15 51,13" fill="#1c140b"/>
+      <circle cx="50" cy="30" r="16" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <circle cx="44" cy="30" r="1.8" fill="#1c140b"/>
+      <circle cx="56" cy="30" r="1.8" fill="#1c140b"/>
+      <path d="M45,36 Q50,40 55,36" stroke="#1c140b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M28,52 C20,66 20,86 32,98 C40,105 60,105 68,98 C80,86 80,66 72,52 C64,45 36,45 28,52 Z" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <path d="M24,75 Q50,84 76,75" stroke="#d99a1f" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="label">
+      <span class="ja">土俵の書</span>
+      <span class="en">SUMO STUDY NOTES</span>
+    </span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  <nav class="mainnav" id="mainnav">
+    <a href="index.html">ホーム</a>
+    <a href="blog.html" class="current">日誌</a>
+    <a href="gallery.html">画帖</a>
+    <a href="about.html">について</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <div class="wrap">
+    <span class="eyebrow">日々の記録</span>
+    <h1>日誌</h1>
+    <p>調べたこと、気づいたこと、観戦の記録。日付とその日思ったことだけを、飾らずに書き留めていく。</p>
+    <svg class="header-strip" width="140" height="18" viewBox="0 0 140 18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,10 C15,2 25,16 40,9 C55,2 65,16 80,9 C95,2 105,16 120,9 C128,6 134,10 140,7"
+            fill="none" stroke="#1c140b" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="entries">
+
+      <article class="entry reveal">
+        <time datetime="2026-08-01">2026.08.01</time>
+        <p>決まり手の一覧をもう一度読み返した。「うっちゃり」と「つり出し」の違いが、ようやく腑に落ちた気がする。文字だけで覚えるより、映像で何度も見返すほうが早い。</p>
+      </article>
+
+      <article class="entry reveal">
+        <time datetime="2026-07-28">2026.07.28</time>
+        <p>番付表の読み方を勉強。同じ「関脇」でも東と西で意味合いが違うことを知らなかった。番付は単なる順位表ではなく、ひとつの体系なのだと実感した。</p>
+      </article>
+
+      <article class="entry reveal">
+        <time datetime="2026-07-20">2026.07.20</time>
+        <p>本場所を初めて最初から最後まで通しで見た。仕切りの間にこんなに意味があるとは思っていなかった。緊張感の作り方が、演出というより儀式に近い。</p>
+      </article>
+
+      <article class="entry reveal">
+        <time datetime="2026-07-15">2026.07.15</time>
+        <p>土俵祭りについて調べる。土俵そのものが神聖な場所として扱われていると知って、力士たちの所作のひとつひとつに納得がいった。</p>
+      </article>
+
+      <article class="entry reveal">
+        <time datetime="2026-07-02">2026.07.02</time>
+        <p>横綱の綱の結び方を調べていたら、思った以上に奥が深くて一日つぶれた。単なる装飾ではなく、地位そのものを表す記号なのだとわかった。</p>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="label"><span class="ja">土俵の書</span></span></a>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">日誌</a>
+      <a href="gallery.html">画帖</a>
+      <a href="about.html">について</a>
+    </nav>
+    <p class="foot-note">© 土俵の書 — 個人の相撲学習ノートです。</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainnav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
