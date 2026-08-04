@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>について | 土俵の書</title>
+<meta name="description" content="土俵の書について、サイトの成り立ち、リンク、お問い合わせ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f0dc;
+    --cream-2:#efe3c2;
+    --cream-3:#e4d5a8;
+    --black:#1c140b;
+    --brown:#5c4c33;
+    --brown-soft:#7a6847;
+    --gold:#d99a1f;
+    --gold-deep:#a8720f;
+    --gold-bright:#e9b73a;
+    --red-soft:#9c4a3e;
+    --serif:'Shippori Mincho B1', serif;
+    --sans:'Zen Kaku Gothic New', sans-serif;
+    --body:'Noto Sans JP', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--black);font-family:var(--body);line-height:1.9;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--gold);color:var(--black);}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;color:var(--gold-deep);
+    text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-deep);display:inline-block;}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;color:var(--black);}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
+    background:linear-gradient(to bottom, rgba(247,240,220,.94), rgba(247,240,220,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:34px;height:34px;flex-shrink:0;}
+  .brand .label{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .ja{font-family:var(--serif);font-weight:800;font-size:1.15rem;color:var(--black);letter-spacing:.04em;}
+  .brand .en{font-family:var(--sans);font-size:.58rem;letter-spacing:.26em;color:var(--gold-deep);margin-top:3px;}
+  nav.mainnav{display:flex;align-items:center;gap:34px;}
+  nav.mainnav a{font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;color:var(--brown);position:relative;padding-bottom:4px;transition:color .25s ease;}
+  nav.mainnav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-deep);transition:width .3s ease;}
+  nav.mainnav a:hover{color:var(--black);}
+  nav.mainnav a:hover::after{width:100%;}
+  nav.mainnav a.current{color:var(--gold-deep);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{width:22px;height:2px;background:var(--black);display:block;}
+
+  .page-header{padding:150px 0 60px;position:relative;border-bottom:1px solid rgba(28,20,11,.12);}
+  .page-header h1{font-size:clamp(2.2rem,5vw,3.2rem);margin:18px 0 20px;}
+  .page-header p{max-width:520px;color:var(--brown);}
+  .header-strip{margin-top:44px;opacity:.8;}
+
+  section{position:relative;padding:80px 0;}
+  section.alt{background:var(--cream-2);border-top:1px solid rgba(28,20,11,.1);border-bottom:1px solid rgba(28,20,11,.1);}
+
+  .section-label{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.28em;color:var(--gold-deep);
+    text-transform:uppercase;display:flex;align-items:center;gap:14px;margin-bottom:30px;
+  }
+  .section-label::after{content:"";flex:1;height:1px;background:linear-gradient(90deg, rgba(168,114,15,.35), transparent);}
+
+  /* ---------- self intro ---------- */
+  .intro-block{display:grid;grid-template-columns:120px 1fr;gap:36px;align-items:start;}
+  .intro-block .avatar{width:120px;height:120px;flex-shrink:0;}
+  .intro-block h2{font-size:1.9rem;margin-bottom:16px;}
+  .intro-block p{color:var(--brown);max-width:600px;}
+  .intro-block p + p{margin-top:14px;}
+
+  /* ---------- site about cards ---------- */
+  .about-grid{display:grid;grid-template-columns:repeat(3, 1fr);gap:2px;background:rgba(28,20,11,.14);border:1px solid rgba(28,20,11,.14);}
+  .about-card{background:var(--cream);padding:34px 28px;}
+  .about-card h3{font-size:1.15rem;margin-bottom:10px;}
+  .about-card p{color:var(--brown);font-size:.88rem;}
+
+  /* ---------- link cards ---------- */
+  .link-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:14px;}
+  .link-card{
+    display:flex;align-items:center;gap:16px;
+    background:var(--cream);border:1px solid var(--cream-3);
+    padding:18px 20px;position:relative;transition:all .3s ease;
+  }
+  .link-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-deep);}
+  .link-card:hover{border-color:var(--gold-deep);background:var(--cream-2);transform:translateY(-2px);}
+  .link-icon{
+    width:42px;height:42px;flex-shrink:0;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--cream-2);border:1px solid var(--cream-3);
+    font-size:1.1rem;
+  }
+  .link-text{flex:1;min-width:0;}
+  .link-name{display:block;font-family:var(--sans);font-weight:700;font-size:.92rem;color:var(--black);margin-bottom:2px;}
+  .link-desc{display:block;font-size:.76rem;color:var(--brown-soft);}
+  .link-arrow{color:var(--gold-deep);font-size:1.1rem;flex-shrink:0;transition:transform .3s ease;}
+  .link-card:hover .link-arrow{transform:translateX(3px);}
+
+  /* ---------- contact form ---------- */
+  .form-card{
+    background:var(--cream);border:1px solid var(--cream-3);
+    padding:40px 44px;max-width:640px;position:relative;
+  }
+  .form-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--gold-deep);}
+  .form-intro{color:var(--brown);font-size:.92rem;margin-bottom:28px;}
+  .form-group{margin-bottom:20px;}
+  .form-label{
+    display:block;font-family:var(--sans);font-size:.74rem;letter-spacing:.1em;
+    color:var(--brown);margin-bottom:8px;
+  }
+  .required{color:var(--red-soft);}
+  .form-input,.form-textarea{
+    width:100%;background:var(--cream-2);border:1px solid var(--cream-3);
+    color:var(--black);font-family:var(--body);font-size:.94rem;
+    padding:11px 14px;outline:none;transition:border-color .3s ease;
+  }
+  .form-input::placeholder,.form-textarea::placeholder{color:var(--brown-soft);opacity:.6;}
+  .form-input:focus,.form-textarea:focus{border-color:var(--gold-deep);}
+  .form-textarea{resize:vertical;min-height:130px;}
+  .field-error{display:block;font-size:.72rem;color:var(--red-soft);margin-top:5px;}
+  .form-submit{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--black);color:var(--cream);border:1px solid var(--black);
+    font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;
+    padding:13px 30px;cursor:pointer;transition:all .3s ease;margin-top:6px;
+  }
+  .form-submit:hover{background:var(--gold-deep);border-color:var(--gold-deep);}
+  .form-submit:disabled{opacity:.5;cursor:not-allowed;}
+  .form-success{
+    background:var(--cream-2);border:1px solid var(--gold-deep);
+    padding:16px 20px;text-align:center;color:var(--black);
+    font-size:.92rem;margin-bottom:20px;
+  }
+  .form-error-global{
+    background:rgba(156,74,62,.1);border:1px solid var(--red-soft);
+    padding:12px 16px;color:var(--red-soft);font-size:.85rem;margin-bottom:16px;
+  }
+
+  footer{padding:60px 0 40px;border-top:1px solid rgba(28,20,11,.12);}
+  footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer nav{display:flex;gap:24px;flex-wrap:wrap;}
+  footer nav a{font-family:var(--sans);font-size:.78rem;color:var(--brown);letter-spacing:.06em;}
+  footer nav a:hover{color:var(--gold-deep);}
+  .foot-note{width:100%;margin-top:30px;font-size:.7rem;color:var(--brown-soft);font-family:var(--sans);letter-spacing:.02em;line-height:1.8;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    nav.mainnav{
+      position:fixed;top:64px;right:0;background:var(--cream-2);flex-direction:column;align-items:flex-start;
+      gap:0;width:220px;border-left:1px solid rgba(28,20,11,.14);border-bottom:1px solid rgba(28,20,11,.14);
+      transform:translateX(100%);transition:transform .35s ease;
+    }
+    nav.mainnav.open{transform:translateX(0);}
+    nav.mainnav a{padding:16px 24px;width:100%;border-bottom:1px solid rgba(28,20,11,.08);}
+    .menu-toggle{display:flex;}
+    .intro-block{grid-template-columns:1fr;}
+    .intro-block .avatar{margin:0 auto;}
+    .about-grid{grid-template-columns:1fr;}
+    .link-grid{grid-template-columns:1fr;}
+    .form-card{padding:30px 24px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <svg class="mark" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,12 C46,7 53,2 58,6 C62,10 57,15 51,13" fill="#1c140b"/>
+      <circle cx="50" cy="30" r="16" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <circle cx="44" cy="30" r="1.8" fill="#1c140b"/>
+      <circle cx="56" cy="30" r="1.8" fill="#1c140b"/>
+      <path d="M45,36 Q50,40 55,36" stroke="#1c140b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M28,52 C20,66 20,86 32,98 C40,105 60,105 68,98 C80,86 80,66 72,52 C64,45 36,45 28,52 Z" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <path d="M24,75 Q50,84 76,75" stroke="#d99a1f" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="label">
+      <span class="ja">土俵の書</span>
+      <span class="en">SUMO STUDY NOTES</span>
+    </span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  <nav class="mainnav" id="mainnav">
+    <a href="index.html">ホーム</a>
+    <a href="blog.html">日誌</a>
+    <a href="gallery.html">画帖</a>
+    <a href="about.html" class="current">について</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <div class="wrap">
+    <span class="eyebrow">このサイトについて</span>
+    <h1>について</h1>
+    <p>「土俵の書」を作っている人のこと、サイトの成り立ち、そして連絡先をまとめています。</p>
+    <svg class="header-strip" width="140" height="18" viewBox="0 0 140 18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,10 C15,2 25,16 40,9 C55,2 65,16 80,9 C95,2 105,16 120,9 C128,6 134,10 140,7"
+            fill="none" stroke="#1c140b" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-label reveal">自己紹介</div>
+    <div class="intro-block reveal">
+      <svg class="avatar" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+        <path d="M75,190 C65,205 60,220 55,230" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M125,190 C135,205 140,220 145,230" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <ellipse cx="50" cy="232" rx="15" ry="7" fill="#1c140b"/>
+        <ellipse cx="150" cy="232" rx="15" ry="7" fill="#1c140b"/>
+        <path d="M58,122 C36,132 24,148 30,168" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <path d="M142,122 C164,132 176,148 170,168" stroke="#1c140b" stroke-width="14" stroke-linecap="round" fill="none"/>
+        <circle cx="28" cy="170" r="10" fill="#1c140b"/>
+        <circle cx="172" cy="170" r="10" fill="#1c140b"/>
+        <path d="M60,95 C40,120 38,166 55,197 C75,217 125,217 145,197 C162,166 160,120 140,95 C120,80 80,80 60,95 Z" fill="#f7f0dc" stroke="#1c140b" stroke-width="5"/>
+        <path d="M46,149 C75,164 125,164 154,149" stroke="#d99a1f" stroke-width="17" stroke-linecap="round" fill="none"/>
+        <rect x="90" y="140" width="20" height="22" rx="5" fill="#d99a1f" stroke="#1c140b" stroke-width="2.5"/>
+        <path d="M52,15 C46,8 55,1 62,6 C68,11 61,18 53,15" fill="#1c140b"/>
+        <circle cx="100" cy="58" r="32" fill="#f7f0dc" stroke="#1c140b" stroke-width="5"/>
+        <circle cx="87" cy="58" r="3.4" fill="#1c140b"/>
+        <circle cx="113" cy="58" r="3.4" fill="#1c140b"/>
+        <circle cx="74" cy="69" r="6.5" fill="#d99a1f" opacity=".45"/>
+        <circle cx="126" cy="69" r="6.5" fill="#d99a1f" opacity=".45"/>
+        <path d="M90,69 Q100,76 110,69" stroke="#1c140b" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <h2>Azalea72</h2>
+        <p>普段は漫画を描いたり、翻訳の勉強をしたりしながら創作活動をしています。相撲についてはまったくの初心者で、「決まり手ってこんなに種類があるんだ」というところから学びが始まりました。</p>
+        <p>知識ゼロから少しずつ積み上げていく過程を、そのまま記録として残しておきたくてこのサイトを作りました。詳しい方から見ればまだまだ拙い内容かもしれませんが、同じように相撲を学び始めた方の参考になればうれしいです。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-label reveal">サイトについて</div>
+    <div class="about-grid reveal">
+      <div class="about-card">
+        <h3>ホーム</h3>
+        <p>学びの番付として、決まり手・番付・歴史・用語の4つを軸に整理しています。</p>
+      </div>
+      <div class="about-card">
+        <h3>日誌</h3>
+        <p>調べたこと、気づいたことを日付だけで淡々と記録していく場所です。</p>
+      </div>
+      <div class="about-card">
+        <h3>画帖</h3>
+        <p>取組や力士のスケッチを少しずつ増やしていく予定の画帖です。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-label reveal">創作の拠点</div>
+    <div class="link-grid reveal">
+
+      <a class="link-card" href="https://azaleacreativeroom888.github.io/" target="_blank" rel="noopener">
+        <div class="link-icon">🌸</div>
+        <div class="link-text">
+          <span class="link-name">Azalea Creative Room</span>
+          <span class="link-desc">創作活動の拠点サイト</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://rookie.shonenjump.com/users/14728546961183734555" target="_blank" rel="noopener">
+        <div class="link-icon">📚</div>
+        <div class="link-text">
+          <span class="link-name">ジャンプルーキー</span>
+          <span class="link-desc">オリジナル漫画を掲載中</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://www.pixiv.net/users/105728284" target="_blank" rel="noopener">
+        <div class="link-icon">🎨</div>
+        <div class="link-text">
+          <span class="link-name">Pixiv</span>
+          <span class="link-desc">二次創作はこちらに掲載</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://kakuyomu.jp/users/azalea_azalea72" target="_blank" rel="noopener">
+        <div class="link-icon">✒️</div>
+        <div class="link-text">
+          <span class="link-name">カクヨム</span>
+          <span class="link-desc">小説を掲載中</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://bsky.app/profile/azaleaazalea88.bsky.social" target="_blank" rel="noopener">
+        <div class="link-icon">🦋</div>
+        <div class="link-text">
+          <span class="link-name">Bluesky</span>
+          <span class="link-desc">近況・作品のお知らせ</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+      <a class="link-card" href="https://www.youtube.com/@LilyPopins0512" target="_blank" rel="noopener">
+        <div class="link-icon">🎬</div>
+        <div class="link-text">
+          <span class="link-name">YouTube（リリポピ）</span>
+          <span class="link-desc">動画チャンネル</span>
+        </div>
+        <span class="link-arrow">›</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-label reveal">お問い合わせ</div>
+
+    <div class="form-card reveal">
+      <p class="form-intro">ご質問・ご感想などはこちらからどうぞ。Gmailで受け取り、返信いたします。</p>
+
+      <div data-fs-success class="form-success" style="display:none;">
+        メッセージを送信しました。ありがとうございます！
+      </div>
+      <div data-fs-error class="form-error-global" style="display:none;"></div>
+
+      <form id="contact-form" action="https://formspree.io/f/maqvpvoz" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="name">お名前</label>
+          <input class="form-input" type="text" id="name" name="name" placeholder="Azalea72">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">メールアドレス <span class="required">*</span></label>
+          <input class="form-input" type="email" id="email" name="email" data-fs-field placeholder="example@email.com" required>
+          <span data-fs-error="email" class="field-error"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="message">メッセージ <span class="required">*</span></label>
+          <textarea class="form-textarea" id="message" name="message" data-fs-field placeholder="メッセージを入力してください…" rows="6" required></textarea>
+          <span data-fs-error="message" class="field-error"></span>
+        </div>
+        <button class="form-submit" type="submit" data-fs-submit-btn>送信する</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="label"><span class="ja">土俵の書</span></span></a>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">日誌</a>
+      <a href="gallery.html">画帖</a>
+      <a href="about.html">について</a>
+    </nav>
+    <p class="foot-note">
+      © 土俵の書 — 個人の相撲学習ノートです。<br>
+      当サイトに掲載されている画像・文章について、AI学習への利用、無断転載・転用を禁止します。<br>
+      Please refrain from using any images or text on this site for AI training, unauthorized reproduction, or redistribution.
+    </p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainnav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contact-form', formId: 'maqvpvoz' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+
+</body>
+</html>
