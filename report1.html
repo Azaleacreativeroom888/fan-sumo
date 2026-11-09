@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有名な力士の一覧 | 土俵の書</title>
+<meta name="description" content="歴代の名横綱を中心に、名前・昇進年・解説をまとめた特集ページ。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f0dc;
+    --cream-2:#efe3c2;
+    --cream-3:#e4d5a8;
+    --black:#1c140b;
+    --brown:#5c4c33;
+    --brown-soft:#7a6847;
+    --gold:#d99a1f;
+    --gold-deep:#a8720f;
+    --gold-bright:#e9b73a;
+    --serif:'Shippori Mincho B1', serif;
+    --sans:'Zen Kaku Gothic New', sans-serif;
+    --body:'Noto Sans JP', sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--cream);color:var(--black);font-family:var(--body);line-height:1.9;overflow-x:hidden;}
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  ::selection{background:var(--gold);color:var(--black);}
+  .wrap{max-width:900px;margin:0 auto;padding:0 28px;}
+  .eyebrow{
+    font-family:var(--sans);font-size:.72rem;letter-spacing:.32em;color:var(--gold-deep);
+    text-transform:uppercase;display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--gold-deep);display:inline-block;}
+  h1,h2,h3{font-family:var(--serif);font-weight:800;color:var(--black);}
+
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;align-items:center;justify-content:space-between;padding:16px 28px;
+    background:linear-gradient(to bottom, rgba(247,240,220,.94), rgba(247,240,220,0));
+    backdrop-filter:blur(2px);
+  }
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand .mark{width:34px;height:34px;flex-shrink:0;}
+  .brand .label{display:flex;flex-direction:column;line-height:1.1;}
+  .brand .ja{font-family:var(--serif);font-weight:800;font-size:1.15rem;color:var(--black);letter-spacing:.04em;}
+  .brand .en{font-family:var(--sans);font-size:.58rem;letter-spacing:.26em;color:var(--gold-deep);margin-top:3px;}
+  nav.mainnav{display:flex;align-items:center;gap:34px;}
+  nav.mainnav a{font-family:var(--sans);font-size:.86rem;letter-spacing:.08em;color:var(--brown);position:relative;padding-bottom:4px;transition:color .25s ease;}
+  nav.mainnav a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--gold-deep);transition:width .3s ease;}
+  nav.mainnav a:hover{color:var(--black);}
+  nav.mainnav a:hover::after{width:100%;}
+  nav.mainnav a.current{color:var(--gold-deep);}
+  .menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;}
+  .menu-toggle span{width:22px;height:2px;background:var(--black);display:block;}
+
+  .page-header{padding:150px 0 50px;position:relative;border-bottom:1px solid rgba(28,20,11,.12);}
+  .breadcrumb{font-family:var(--sans);font-size:.74rem;color:var(--brown-soft);margin-bottom:18px;}
+  .breadcrumb a{color:var(--gold-deep);}
+  .breadcrumb a:hover{text-decoration:underline;}
+  .page-header h1{font-size:clamp(2rem,5vw,2.9rem);margin:14px 0 18px;}
+  .page-header p{max-width:560px;color:var(--brown);}
+  .header-strip{margin-top:40px;opacity:.8;}
+
+  section{position:relative;padding:70px 0 110px;}
+
+  /* ---------- rikishi list ---------- */
+  .rikishi-list{display:flex;flex-direction:column;gap:2px;background:rgba(28,20,11,.14);border:1px solid rgba(28,20,11,.14);}
+  .rikishi{
+    background:var(--cream);
+    padding:34px 38px;
+    display:grid;
+    grid-template-columns:64px 1fr;
+    gap:26px;
+    transition:background .3s ease;
+  }
+  .rikishi:hover{background:var(--cream-2);}
+  .rikishi .badge{
+    width:64px;height:64px;border-radius:50%;
+    border:1.5px solid var(--gold-deep);
+    display:flex;align-items:center;justify-content:center;
+    flex-direction:column;
+    font-family:var(--serif);color:var(--gold-deep);
+    text-align:center;line-height:1.1;
+  }
+  .rikishi .badge .num{font-size:1.1rem;font-weight:800;}
+  .rikishi .badge .unit{font-size:.58rem;letter-spacing:.05em;}
+  .rikishi .name-row{
+    display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px;
+  }
+  .rikishi h2{font-size:1.4rem;}
+  .rikishi .kana{font-family:var(--sans);font-size:.76rem;color:var(--brown-soft);}
+  .rikishi .meta{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--sans);font-size:.76rem;letter-spacing:.04em;
+    color:var(--gold-deep);margin-bottom:14px;
+  }
+  .rikishi .meta::before{content:"●";font-size:.5rem;}
+  .rikishi p.desc{color:var(--brown);font-size:.92rem;max-width:640px;}
+
+  .note-box{
+    margin-top:48px;
+    padding:26px 30px;
+    background:var(--cream-2);
+    border-left:3px solid var(--gold-deep);
+  }
+  .note-box p{color:var(--brown);font-size:.88rem;}
+
+  footer{padding:60px 0 40px;border-top:1px solid rgba(28,20,11,.12);}
+  footer .wrap{max-width:1080px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+  footer nav{display:flex;gap:24px;flex-wrap:wrap;}
+  footer nav a{font-family:var(--sans);font-size:.78rem;color:var(--brown);letter-spacing:.06em;}
+  footer nav a:hover{color:var(--gold-deep);}
+  .foot-note{width:100%;margin-top:30px;font-size:.72rem;color:var(--brown-soft);font-family:var(--sans);letter-spacing:.04em;}
+
+  .reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (max-width:860px){
+    nav.mainnav{
+      position:fixed;top:64px;right:0;background:var(--cream-2);flex-direction:column;align-items:flex-start;
+      gap:0;width:220px;border-left:1px solid rgba(28,20,11,.14);border-bottom:1px solid rgba(28,20,11,.14);
+      transform:translateX(100%);transition:transform .35s ease;
+    }
+    nav.mainnav.open{transform:translateX(0);}
+    nav.mainnav a{padding:16px 24px;width:100%;border-bottom:1px solid rgba(28,20,11,.08);}
+    .menu-toggle{display:flex;}
+    .rikishi{grid-template-columns:1fr;padding:28px 24px;}
+    .rikishi .badge{margin-bottom:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="brand">
+    <svg class="mark" viewBox="0 0 100 110" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50,12 C46,7 53,2 58,6 C62,10 57,15 51,13" fill="#1c140b"/>
+      <circle cx="50" cy="30" r="16" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <circle cx="44" cy="30" r="1.8" fill="#1c140b"/>
+      <circle cx="56" cy="30" r="1.8" fill="#1c140b"/>
+      <path d="M45,36 Q50,40 55,36" stroke="#1c140b" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M28,52 C20,66 20,86 32,98 C40,105 60,105 68,98 C80,86 80,66 72,52 C64,45 36,45 28,52 Z" fill="#efe3c2" stroke="#1c140b" stroke-width="3.5"/>
+      <path d="M24,75 Q50,84 76,75" stroke="#d99a1f" stroke-width="8" stroke-linecap="round" fill="none"/>
+    </svg>
+    <span class="label">
+      <span class="ja">土俵の書</span>
+      <span class="en">SUMO STUDY NOTES</span>
+    </span>
+  </a>
+  <button class="menu-toggle" id="menuToggle" aria-label="メニューを開く"><span></span><span></span><span></span></button>
+  <nav class="mainnav" id="mainnav">
+    <a href="index.html">ホーム</a>
+    <a href="blog.html">日誌</a>
+    <a href="gallery.html" class="current">画帖</a>
+    <a href="about.html">について</a>
+  </nav>
+</header>
+
+<div class="page-header">
+  <div class="wrap">
+    <p class="breadcrumb"><a href="gallery.html">画帖</a> ／ 特集</p>
+    <span class="eyebrow">特集ページ</span>
+    <h1>有名な力士の一覧</h1>
+    <p>歴代の横綱を中心に、名前・昇進年・解説をまとめた一覧。江戸時代から現代まで、時代ごとの名力士を少しずつ追加していく予定。</p>
+    <svg class="header-strip" width="140" height="18" viewBox="0 0 140 18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,10 C15,2 25,16 40,9 C55,2 65,16 80,9 C95,2 105,16 120,9 C128,6 134,10 140,7"
+            fill="none" stroke="#1c140b" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+    </svg>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="rikishi-list reveal">
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">4</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>谷風梶之助</h2><span class="kana">たにかぜ かじのすけ</span></div>
+          <span class="meta">1789年(寛政元年)横綱免許</span>
+          <p class="desc">江戸時代を代表する大横綱。公式には第4代横綱だが、自らの代で横綱の称号を与えられた実質的な最初の横綱とされる。幕内で63連勝を記録し、この記録は昭和に双葉山が69連勝を達成するまで約150年にわたり破られなかった。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">35</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>双葉山定次</h2><span class="kana">ふたばやま さだじ</span></div>
+          <span class="meta">1937年(昭和12年)横綱昇進</span>
+          <p class="desc">「相撲の神様」「昭和の角聖」と呼ばれた大横綱。1936年から1939年にかけて69連勝を達成し、この記録は現在も破られていない。少年時代に右目をほぼ失明していたというハンデを抱えながら頂点に立ったことでも知られる。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">48</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>大鵬幸喜</h2><span class="kana">たいほう こうき</span></div>
+          <span class="meta">1961年(昭和36年)横綱昇進・優勝32回</span>
+          <p class="desc">21歳3ヶ月という当時史上最年少で横綱に昇進。柏戸との「柏鵬時代」を築き、史上初の6連覇を2度達成するなど、昭和を代表する大横綱として活躍した。「巨人、大鵬、玉子焼き」という言葉が生まれるほどの国民的人気を誇った。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">55</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>北の湖敏満</h2><span class="kana">きたのうみ としみつ</span></div>
+          <span class="meta">1974年(昭和49年)横綱昇進・優勝24回</span>
+          <p class="desc">21歳2ヶ月で大鵬の記録を更新する当時史上最年少で横綱に昇進。「北の怪童」と呼ばれる突出した体格と強さで、輪島との「輪湖時代」を築いた。引退後は日本相撲協会の理事長も務めた。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">58</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>千代の富士貢</h2><span class="kana">ちよのふじ みつぐ</span></div>
+          <span class="meta">1981年(昭和56年)横綱昇進・優勝31回</span>
+          <p class="desc">「ウルフ」の愛称で親しまれた平成初期までの大横綱。関脇での初優勝から一気に横綱まで駆け上がり、角界の枠を越えた人気を集めた。鍛え抜かれた筋肉質の体で、昭和最後の優勝力士としても記憶されている。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">65</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>貴乃花光司</h2><span class="kana">たかのはな こうじ</span></div>
+          <span class="meta">1994年(平成6年)横綱昇進・優勝22回</span>
+          <p class="desc">兄の若乃花とともに「若貴ブーム」を巻き起こし、平成の相撲人気を牽引した大横綱。2001年夏場所千秋楽、右膝を痛めながらも武蔵丸との横綱対決を制して優勝した一番は、今も語り継がれる名場面。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">68</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>朝青龍明徳</h2><span class="kana">あさしょうりゅう あきのり</span></div>
+          <span class="meta">2003年(平成15年)横綱昇進・優勝25回</span>
+          <p class="desc">モンゴル出身で、所要25場所という史上最速のスピードで横綱に昇進。圧倒的な強さで一時代を築く一方、立ち合いの激しさなどから「横綱の品格」がたびたび話題になった力士でもある。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">69</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>白鵬翔</h2><span class="kana">はくほう しょう</span></div>
+          <span class="meta">2007年(平成19年)横綱昇進・優勝45回(歴代最多)</span>
+          <p class="desc">歴代最多となる45回の幕内優勝、最長となる84場所の横綱在位を誇る平成・令和を代表する大横綱。2015年には大鵬の32回を超える33回目の優勝を果たし、日本の相撲史の記録を44年ぶりに塗り替えた。</p>
+        </div>
+      </div>
+
+      <div class="rikishi">
+        <div class="badge"><span class="num">73</span><span class="unit">代</span></div>
+        <div>
+          <div class="name-row"><h2>照ノ富士春雄</h2><span class="kana">てるのふじ はるお</span></div>
+          <span class="meta">2021年(令和3年)横綱昇進</span>
+          <p class="desc">大関から怪我による大幅な番付降下を経験しながら、幕下付近から番付を立て直して横綱まで昇りつめた異色の経歴を持つ。令和最初の横綱であり、その道のりそのものが相撲ファンの間で語り継がれている。</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="note-box reveal">
+      <p>まずは横綱を中心にまとめた。大関や、時代を彩った個性的な力士たちについても、今後少しずつ追加していく予定。</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="brand"><span class="label"><span class="ja">土俵の書</span></span></a>
+    <nav>
+      <a href="index.html">ホーム</a>
+      <a href="blog.html">日誌</a>
+      <a href="gallery.html">画帖</a>
+      <a href="about.html">について</a>
+    </nav>
+    <p class="foot-note">© 土俵の書 — 個人の相撲学習ノートです。</p>
+  </div>
+</footer>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const nav = document.getElementById('mainnav');
+  toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => nav.classList.remove('open')));
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('in'); io.unobserve(entry.target); }
+    });
+  }, { threshold: 0.1 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
