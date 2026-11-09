@@ -104,6 +104,36 @@
   }
   .note-box p{color:var(--brown);font-size:.9rem;}
 
+  /* ---------- feature link (report1) ---------- */
+  .feature-link{
+    display:flex;
+    align-items:center;
+    gap:28px;
+    background:var(--black);
+    color:var(--cream);
+    padding:36px 40px;
+    margin-bottom:48px;
+    border:1px solid var(--black);
+    transition:background .3s ease;
+  }
+  .feature-link:hover{background:#2a1f12;}
+  .feature-link .ficon{
+    width:64px;height:64px;flex-shrink:0;
+    border-radius:50%;
+    border:1.5px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .feature-link .ftext{flex:1;min-width:0;}
+  .feature-link .eyebrow{color:var(--gold-bright);}
+  .feature-link .eyebrow::before{background:var(--gold-bright);}
+  .feature-link h2{color:var(--cream);font-size:1.5rem;margin:10px 0 8px;}
+  .feature-link p{color:var(--cream-3);font-size:.88rem;}
+  .feature-link .farrow{
+    font-family:var(--serif);font-size:1.8rem;color:var(--gold-bright);flex-shrink:0;
+    transition:transform .3s ease;
+  }
+  .feature-link:hover .farrow{transform:translateX(6px);}
+
   footer{padding:60px 0 40px;border-top:1px solid rgba(28,20,11,.12);}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
   footer nav{display:flex;gap:24px;flex-wrap:wrap;}
@@ -172,6 +202,18 @@
 
 <section>
   <div class="wrap">
+
+    <a href="report1.html" class="feature-link reveal">
+      <div class="ficon">
+        <svg width="34" height="34" viewBox="0 0 60 60"><circle cx="30" cy="18" r="9" fill="none" stroke="#f7f0dc" stroke-width="2.4"/><path d="M14,52 C14,36 21,28 30,28 C39,28 46,36 46,52" fill="none" stroke="#f7f0dc" stroke-width="2.4"/><path d="M18,40 Q30,47 42,40" stroke="#d99a1f" stroke-width="2.6" fill="none"/></svg>
+      </div>
+      <div class="ftext">
+        <span class="eyebrow">特集ページ</span>
+        <h2>有名な力士の一覧</h2>
+        <p>歴代の名力士や、今注目している力士をまとめた特集ページ。経歴や印象に残った取組をあわせて紹介。</p>
+      </div>
+      <span class="farrow">→</span>
+    </a>
 
     <div class="gallery-grid reveal">
 
